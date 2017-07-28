@@ -1,0 +1,21 @@
+{% extends "main_template.html" %}
+
+{% block content %}
+<br>
+<div class="container">
+    {% if form.errors %}
+       <p class="text-warning">Username or password did not match</p>
+    {% endif %}
+
+    <form role="form" class="form-horizontal" method="post" action="{% url 'login' %}" />
+          {% csrf_token %}
+
+          {{form}}
+
+          <input class="waves-effect waves-light btn" type="submit" value="Login" />
+          <input type="hidden" name="next" value="{{next}}" />
+    </form>
+
+</div>
+<br>
+{% endblock %}

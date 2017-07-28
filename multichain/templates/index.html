@@ -1,0 +1,36 @@
+{% extends 'main_template.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+    <div class="row">
+      <div class="col s1"></div>
+      <div class="col s3"><img class="responsive-img" src="{% static 'Warthog.png' %}" /></div>
+      <div class="col s7">
+          <h3>Velkomen til Svinepels</h3>
+          <p>Her finner du informasjon om blockchainen svinepels</p>
+          <p>Du kan se status på kjeden, registrere deg, logge inn og bruke Svinepels tjenester.</p>
+
+
+          <div class="card teal lighten-1">
+            <div class="card-content white-text">
+              <span class="card-title">Kjede Status</span>
+              <p>{{info}}</p>
+            </div>
+
+            </div>
+
+      </div>
+      <div class="col s1"></div>
+    </div>
+
+     <div class="row">
+      <div class="col s1"></div>
+      <div class="col s5"></div>
+      <div class="col s5"></div>
+      <div class="col s1"></div>
+    </div>
+
+
+{% endblock %}
