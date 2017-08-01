@@ -1,5 +1,6 @@
 
-
+from django.contrib.auth.models import User
+from .models import SendCoins, UserAddress
 from Savoir import Savoir
 
 
@@ -38,3 +39,11 @@ def get_user_balance(user_address):
     except:
         balance = {'qty' : "ERROR getting user balance"}
         return balance
+
+
+def send_coins(from_address, to_address, amount):
+    from_user = UserAddress.object.get(pk=from_address[0])
+    to_user = UserAddress.object.get(pk=to_address[0])
+    api = connect_to_blockchain()
+    send = api.sendassetfrom(from_user.address,to_user.address,"Svinepelser",amount )
+    return send

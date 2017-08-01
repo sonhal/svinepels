@@ -10,6 +10,7 @@
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     </head>
 
     <body>
@@ -31,6 +32,7 @@
                           <div class="col s4">
                              <ul id="nav-mobile" class="right hide-on-med-and-down">
                              {% if user.is_authenticated %}
+                             <li><a href="{% url 'homepage' %} ">{{user.username}}</a></li>
                              <li><a href="{% url 'logout' %} ">Logout</a></li>
                              {% else %}
                              <li><a href="{% url 'login' %} ">Login</a></li>
@@ -59,14 +61,13 @@
               <div class="col l6 s12">
                 <h5 class="white-text">Kontakt oss</h5>
                 <p class="grey-text text-lighten-4">Gaddeveien 18B</p>
+                <p class="grey-text text-lighten-4">Sondre Halvorsen</p>
+                <p class="grey-text text-lighten-4">Tlf: +47 97649279</p>
               </div>
               <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">Lenker</h5>
                 <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Facebook</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Instagram</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Github</a></li>
-
+                  <li><a class="grey-text text-lighten-3" href="https://github.com/sonhal/svinepels">Github</a></li>
                 </ul>
               </div>
             </div>
@@ -82,5 +83,8 @@
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="{% static 'materialize/js/materialize.min.js' %}"></script>
+        {% block javascript %}
+
+        {% endblock %}
     </body>
   </html>

@@ -20,7 +20,7 @@ admin.autodiscover()
 
 
 urlpatterns = [
-    url(r'^multichain/', include('multichain.urls'),name="home"),
+
     url(r'^', include('multichain.urls')),
     url(r'^admin/', admin.site.urls),
 

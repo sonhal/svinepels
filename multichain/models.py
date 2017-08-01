@@ -4,15 +4,21 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class user_addresses(models.Model):
-    user = models.ForeignKey(User)
+class UserAddress(models.Model):
+    user = models.ForeignKey(User, related_name="blockchain_address")
     address = models.CharField(max_length=100)
 
     def __str__(self):
-        return "{0} Blockchain address".format(self.user)
+        return (self.user.username)
+
+class SendCoins(models.Model):
+    from_user = models.ForeignKey(User, related_name="sendt_coins")
+    to_user = models.ForeignKey(User, related_name="received_coins")
+    amount = models.IntegerField()
+
+    def __str__(self):
+        return "{0} sendt {2} to {1}".format(self.from_user.username, self.to_user.username, self.amount)
 
 
-def create_user(username,password):
-    user = User.objects.create_user(username=username,password=password)
 
 
