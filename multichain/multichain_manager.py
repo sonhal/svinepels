@@ -9,7 +9,7 @@ rpcpasswd = '68N2Mx1sGrhhR1QTxCgBvDkXcH8me1Zu4oEXubkhfge8'
 rpchost = 'localhost'
 rpcport = '2768'
 chainname = 'testchain'
-
+admin_address = "PLACEHOLDER"
 
 def connect_to_blockchain():
     try:
@@ -60,6 +60,8 @@ def send_coins(from_address, to_address, amount):
 def blockchain_make_address(user):
     api = connect_to_blockchain()
     address = api.getnewaddress()
+    grant_address_premission = api.grant(address, 'connect', 'send', 'receive')
+    send_coins(admin_address, address, 10)
     new_user = UserAddress.objects.create(user=user, address=address)
     new_user.save()
     return new_user

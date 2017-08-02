@@ -11,16 +11,16 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block content %}
-  <h2>Sign up</h2>
+  <div class="container">
   <form action="" method="post">
     {% csrf_token %}
     {% for field in form %}
-      <div class="input-field col s4 ">
+      <div class="input-field col s2 ">
       <p>
         {{ field.label_tag }}<br>
         {{ field }}
         {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
+
         {% endif %}
         {% for error in field.errors %}
           <p style="color: red">{{ error }}</p>
@@ -28,6 +28,10 @@ $(document).ready(function() {
       </p>
       </div>
     {% endfor %}
-    <button type="submit">Sign up</button>
+    <button class="btn waves-effect waves-light" type="submit" >Registrer
+    <i class="material-icons right">send</i>
+  </button>
   </form>
+    <br>
+  </div>
 {% endblock %}
