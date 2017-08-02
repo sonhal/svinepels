@@ -12,13 +12,17 @@ class UserAddress(models.Model):
         return (self.user.username)
 
 class SendCoins(models.Model):
-    from_user = models.ForeignKey(User, related_name="sendt_coins")
     to_user = models.ForeignKey(User, related_name="received_coins")
     amount = models.IntegerField()
 
     def __str__(self):
         return "{0} sendt {2} to {1}".format(self.from_user.username, self.to_user.username, self.amount)
 
+class UserAddressManager(models.Manager):
+    def create_user_address(self, address):
+        user_address = self.create(adress=address)
+
+        return user_address
 
 
 

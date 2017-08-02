@@ -30,6 +30,14 @@ def get_info():
     return nodeinfo
 
 
+def get_user_address(request):
+    try:
+        uaddress = UserAddress.objects.get(pk=request.user.id)
+        return str(uaddress.address)
+    except:
+        return "ERROR"
+
+
 def get_user_balance(user_address):
     api = connect_to_blockchain()
     try:
@@ -42,8 +50,16 @@ def get_user_balance(user_address):
 
 
 def send_coins(from_address, to_address, amount):
-    from_user = UserAddress.object.get(pk=from_address[0])
-    to_user = UserAddress.object.get(pk=to_address[0])
+    to_user = UserAddress.objects.get(pk=to_address[0])
+    amount_int = int( '0' + amount)
     api = connect_to_blockchain()
-    send = api.sendassetfrom(from_user.address,to_user.address,"Svinepelser",amount )
-    return send
+    send = api.sendassetfrom(from_address,to_user.address,"Svinepelser",amount_int )
+    debug_info = { 'send' : send , 'fra' : from_address }
+    return debug_info
+
+def blockchain_make_address(user):
+    api = connect_to_blockchain()
+    address = api.getnewaddress()
+    new_user = UserAddress.objects.create(user=user, address=address)
+    new_user.save()
+    return new_user

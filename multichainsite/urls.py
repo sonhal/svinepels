@@ -17,7 +17,8 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views
 admin.autodiscover()
-
+from django.views.generic.edit import CreateView
+from django.contrib.auth.forms import UserCreationForm
 
 urlpatterns = [
 
@@ -30,6 +31,13 @@ urlpatterns = [
 
     url(r'^logout/$', views.logout,
         {'next_page' : 'index'},
-        name="logout")
+        name="logout"),
+
+    url('^register/', CreateView.as_view(
+            template_name='register.html',
+            form_class=UserCreationForm,
+            success_url='login')
+            , name='register')
 ]
+
 
