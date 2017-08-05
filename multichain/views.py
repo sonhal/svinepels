@@ -1,21 +1,19 @@
 from django.shortcuts import render, redirect
 from .multichain_manager import get_info, get_user_balance, send_coins, get_user_address, blockchain_make_address
 from django.contrib.auth.decorators import login_required
-from .models import UserAddress
+from .models import UserAddress, get_user_addresses
 from .forms import Send_coins_form, RegisterForm
 from django.contrib.auth.models import User
 
 
 # Create your views here.
 
-multichaininfo = get_info()
-
 
 def info(request):
-    return render(request, 'info.html', {'info' : multichaininfo} )
+    return render(request, 'info.html', {'info' : get_info()} )
 
 def index(request):
-    return render(request, 'index.html', {'info' : multichaininfo} )
+    return render(request, 'index.html', {'info' : get_info()} )
 
 def register(request):
     ERROR = "Noe gjekk feil under registreringer, Vennligst prøv igjen"
@@ -49,6 +47,9 @@ def make_address(request):
 def user_homepage(request):
     balance = get_user_balance(get_user_address(request))
     user_address = get_user_address(request)
+    private_addresses = get_user_addresses(request)
+
+
     if user_address == "ERROR":
         return redirect('makeaddress')
     else:
@@ -64,7 +65,7 @@ def user_homepage(request):
                 return render(request, 'index.html', {'info': info})
         else:
             form = Send_coins_form()
-        return render(request, 'homepage.html', {'balance': balance, 'form': form})
+        return render(request, 'homepage.html', {'balance': balance, 'form': form , 'private_addresses' : private_addresses})
 
 
 

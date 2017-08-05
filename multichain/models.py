@@ -13,7 +13,7 @@ class UserAddress(models.Model):
 
 class SendCoins(models.Model):
     to_user = models.ForeignKey(User, related_name="received_coins")
-    amount = models.IntegerField()
+    amount = models.PositiveIntegerField()
 
     def __str__(self):
         return "{0} sendt {2} to {1}".format(self.from_user.username, self.to_user.username, self.amount)
@@ -24,5 +24,9 @@ class UserAddressManager(models.Manager):
 
         return user_address
 
+def get_user_addresses(request):
+    addresses_dict = UserAddress.objects.filter(pk=request.user.id).values("address")
+    addresses = list(addresses_dict)
+    return addresses
 
 

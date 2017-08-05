@@ -21,10 +21,27 @@ $(document).ready(function() {
     <div class="row">
         <div class="col s1"></div>
         <div class="col s5">
-            <p>Hi, {{user.username}}</p></hi>
-            <p>Lommebok</p>
-            <p>{{balance.name}} : {{balance.qty}}</p>
-            <p>{{send_info}}</p>
+            <div class="card grey lighten-1">
+
+
+                <div class="card-content black-text">
+                    <span class="card-title">Hi, {{user.username}}</span><br>
+                    <br>
+                {{balance.name}} : {{balance.qty}}<br>{{send_info}}
+
+                </div>
+            </div>
+               <div class="card teal lighten-1">
+                <div class="card-content white-text">
+                    <span class="card-title">Svinepels private addresser:</span>
+                        {% for a in private_addresses %}
+
+                           {{a}}
+
+                        {% endfor %}
+
+                </div>
+        </div>
         </div>
 
         <div class="col s5">
